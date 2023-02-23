@@ -67,15 +67,11 @@ public class Project implements Serializable {
 
 	@Override
 	public String toString() {
-		return ", projectId=" + projectId + ", projectName=" + projectName + ", joiningDate=" + joiningDate
-				+ ", employeId=" + employeId + "";
+		return  "" + projectName ;
+				
 	}
 
-//	@Override
-//	public String toString() {
-//		return "" + projectId +","+ projectName +","+ joiningDate
-//				+ ","+ employeId + ",";
-//	}
+
 	
 	
 

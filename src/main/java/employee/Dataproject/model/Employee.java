@@ -79,8 +79,8 @@ public class Employee implements Serializable {
 
 	@Override
 	public String toString() {
-		return ",employeId=" + employeId + ", employeeName=" + employeeName + ", employeeSalary="
-				+ employeeSalary + ", employeeDesignation=" + employeeDesignation + ", projects=" + projects + "";
+		return "," + employeId + "," + employeeName + ","
+				+ employeeSalary + "," + employeeDesignation + "," + projects + "";
 	}
 
 }

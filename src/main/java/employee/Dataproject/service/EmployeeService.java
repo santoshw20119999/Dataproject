@@ -36,14 +36,16 @@ public class EmployeeService {
 //			obs.writeObject(list.toString());
 //			obs.close();
 //			fos.close();
-			
+			String header = ",Employee Id,Employee Name,Employee Salary,Employee Designation,Projects";
+			String[] harray = header.split(",");
 			String[] str = employee.toString().split(",");
 			List<String[]> elist = new ArrayList<>();
-			CSVWriter csv = new CSVWriter(new FileWriter(path));
+			CSVWriter csv = new CSVWriter(new FileWriter(path));       //create file
 			elist.add(str);
+			csv.writeNext(harray);
 			csv.writeAll(elist);
 			csv.close();
-		} catch (Exception e){
+		} catch (Exception e) {
 			System.out.println(e);
 		}
 		return ResponseEntity.status(HttpStatus.OK).body("file downloaded");
