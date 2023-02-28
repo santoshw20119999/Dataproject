@@ -100,10 +100,11 @@ public class EmployeeService implements ServiceInterface {
 			String header = ",Employee Id,Employee Name,Employee Salary,Employee Designation,Projects";
 			String[] harray = header.split(",");
 			csv.writeNext(harray);
-			List<String[]> elist = new ArrayList<>();
+			
 			Iterator itr = employee.listIterator();
 
 			while (itr.hasNext()) {
+				List<String[]> elist = new ArrayList<>();
 				String[] str = itr.next().toString().split(",");
 				elist.add(str);
 				csv.writeAll(elist);
