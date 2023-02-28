@@ -27,6 +27,11 @@ public class EmployeeController {
 		return employeeService.getEmployeeData(employeeId);	
 	}
 	
+	@PostMapping("/downloadfile")
+	public ResponseEntity<String> getEmployeeData() {
+		return employeeService.getEmployeeData();	
+	}
+	
 	@GetMapping("/fakedata")
 	public void randondata() {
 		employeeService.generateData();

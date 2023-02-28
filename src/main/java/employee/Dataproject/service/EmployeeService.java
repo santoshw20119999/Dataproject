@@ -3,6 +3,7 @@ package employee.Dataproject.service;
 import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
@@ -35,6 +36,7 @@ public class EmployeeService implements ServiceInterface {
 
 	// add boolean argument
 	public ResponseEntity<String> getEmployeeData(Long employeeId) {
+
 		Optional<Employee> employee = employeeRepository.findById(employeeId); // printing optional in file
 		List<Employee> employeelist = employeeRepository.findAll();
 		// Employee employee = employeeRepository.getEmployeeData(employeeId);
@@ -42,7 +44,6 @@ public class EmployeeService implements ServiceInterface {
 
 			String s = String.valueOf(employeeId);
 			String path = "C:\\Users\\santosh wathore\\Desktop\\files\\" + s + ".csv";
-
 			String header = ",Employee Id,Employee Name,Employee Salary,Employee Designation,Projects";
 			String[] harray = header.split(",");
 			String[] str = employee.toString().split(",");
@@ -87,6 +88,31 @@ public class EmployeeService implements ServiceInterface {
 
 		}
 
+	}
+
+	@Override
+	public ResponseEntity<String> getEmployeeData() {
+		List<Employee> employee = employeeRepository.findAll();
+		try {
+			String s = "allrecords";
+			String path = "C:\\Users\\santosh wathore\\Desktop\\files\\" + s + ".csv";
+			CSVWriter csv = new CSVWriter(new FileWriter(path)); // create file
+			String header = ",Employee Id,Employee Name,Employee Salary,Employee Designation,Projects";
+			String[] harray = header.split(",");
+			csv.writeNext(harray);
+			List<String[]> elist = new ArrayList<>();
+			Iterator itr = employee.listIterator();
+
+			while (itr.hasNext()) {
+				String[] str = itr.next().toString().split(",");
+				elist.add(str);
+				csv.writeAll(elist);
+			}
+			csv.close();
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return ResponseEntity.status(HttpStatus.OK).body("file downloaded");
 	}
 
 }
