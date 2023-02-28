@@ -16,7 +16,6 @@ public class EmployeeController {
 	@Autowired
 	EmployeeService employeeService;
 
-
 	@PostMapping("/addemployee")
 	public ResponseEntity<String> addEmployee(@RequestBody Employee employee) {
 		return employeeService.addEmployee(employee);
@@ -24,14 +23,14 @@ public class EmployeeController {
 
 	@GetMapping("/downloadfile")
 	public ResponseEntity<String> getEmployeeData(@RequestParam("employeeId") Long employeeId) {
-		return employeeService.getEmployeeData(employeeId);	
+		return employeeService.getEmployeeData(employeeId);
 	}
-	
+
 	@PostMapping("/downloadfile")
 	public ResponseEntity<String> getEmployeeData() {
-		return employeeService.getEmployeeData();	
+		return employeeService.getEmployeeData();
 	}
-	
+
 	@GetMapping("/fakedata")
 	public void randondata() {
 		employeeService.generateData();

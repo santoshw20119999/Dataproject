@@ -34,14 +34,11 @@ public class EmployeeService implements ServiceInterface {
 		return ResponseEntity.status(HttpStatus.OK).body("Employee added successfully");
 	}
 
-	// add boolean argument
 	public ResponseEntity<String> getEmployeeData(Long employeeId) {
-
 		Optional<Employee> employee = employeeRepository.findById(employeeId); // printing optional in file
 		List<Employee> employeelist = employeeRepository.findAll();
 		// Employee employee = employeeRepository.getEmployeeData(employeeId);
 		try {
-
 			String s = String.valueOf(employeeId);
 			String path = "C:\\Users\\santosh wathore\\Desktop\\files\\" + s + ".csv";
 			String header = ",Employee Id,Employee Name,Employee Salary,Employee Designation,Projects";
@@ -63,7 +60,6 @@ public class EmployeeService implements ServiceInterface {
 	public void generateData() {
 		Faker f = new Faker();
 		Employee emp = null;
-
 		for (int i = 0; i < 101; i++) { // fake data for Employee
 			emp = new Employee();
 			emp.setEmployeeName(f.name().firstName());
@@ -85,9 +81,7 @@ public class EmployeeService implements ServiceInterface {
 				p.setProjectName(f.programmingLanguage().name());
 				projectRepository.save(p);
 			}
-
 		}
-
 	}
 
 	@Override
@@ -100,7 +94,7 @@ public class EmployeeService implements ServiceInterface {
 			String header = ",Employee Id,Employee Name,Employee Salary,Employee Designation,Projects";
 			String[] harray = header.split(",");
 			csv.writeNext(harray);
-			
+
 			Iterator itr = employee.listIterator();
 
 			while (itr.hasNext()) {
