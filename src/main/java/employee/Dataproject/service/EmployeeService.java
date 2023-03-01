@@ -35,23 +35,29 @@ public class EmployeeService implements ServiceInterface {
 	}
 
 	public ResponseEntity<String> getEmployeeData(Long employeeId) {
+
 		Optional<Employee> employee = employeeRepository.findById(employeeId); // printing optional in file
-		List<Employee> employeelist = employeeRepository.findAll();
-		// Employee employee = employeeRepository.getEmployeeData(employeeId);
-		try {
-			String s = String.valueOf(employeeId);
-			String path = "C:\\Users\\santosh wathore\\Desktop\\files\\" + s + ".csv";
-			String header = ",Employee Id,Employee Name,Employee Salary,Employee Designation,Projects";
-			String[] harray = header.split(",");
-			String[] str = employee.toString().split(",");
-			List<String[]> elist = new ArrayList<>();
-			CSVWriter csv = new CSVWriter(new FileWriter(path)); // create file
-			elist.add(str);
-			csv.writeNext(harray);
-			csv.writeAll(elist);
-			csv.close();
-		} catch (Exception e) {
-			System.out.println(e);
+		if (employee.isPresent()) {
+
+			List<Employee> employeelist = employeeRepository.findAll();
+
+			try {
+				String s = String.valueOf(employeeId);
+				String path = "C:\\Users\\santosh wathore\\Desktop\\files\\" + s + ".csv";
+				String header = ",Employee Id,Employee Name,Employee Salary,Employee Designation,Projects";
+				String[] harray = header.split(",");
+
+				String[] str = employee.get().toString().split(",");
+				List<String[]> elist = new ArrayList<>();
+				CSVWriter csv = new CSVWriter(new FileWriter(path)); // create file
+				elist.add(str);
+				csv.writeNext(harray);
+				csv.writeAll(elist);
+				csv.close();
+			} catch (Exception e) {
+				System.out.println(e);
+			}
+
 		}
 		return ResponseEntity.status(HttpStatus.OK).body("file downloaded");
 	}
